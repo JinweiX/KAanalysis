@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{# 标题 #}
+{% block title %}
+KA资源池
+{% endblock %}
+
+{# 数据列表内容 #}
+{% block appData %}
+  <h2 class="sub-header">资源池数据</h2>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>名称</th>
+          <th>行业</th>
+          <th>细分行业</th>
+          <th>公司</th>
+          <th>月活(万人)</th>
+          <th>日活(万人)</th>
+          <th>状态</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.itemType }}</td>
+          <td>{{ item.itemSecType }}</td>
+          <td><a href="{% url 'item_company' item.company.id %}">{{ item.company }}</a></td>
+          <td>{{ item.MAU }}</td>
+          <td>{{ item.DAU }}</td>
+          <td>
+          {% ifequal item.state 0 %}
+              <a style="color: black">未知</a>
+          {% endifequal %}
+
+          {% ifequal item.state 1 %}
+              <a style="color: green" href="/ka">KA</a>
+          {% endifequal %}
+
+          {% ifequal item.state 2 %}
+              <a style="color: red" href="/out">淘汰</a>
+          {% endifequal %}
+
+          </td>
+
+          <td>
+          {% ifequal item.state 0 %}
+                 <button>转KA</button>
+          {% endifequal %}
+
+          {% ifequal item.state 1 %}
+              <button>淘汰</button>
+          {% endifequal %}
+
+          {% ifequal item.state 2 %}
+              <button>转回</button>
+          {% endifequal %}
+
+          </td>
+
+
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

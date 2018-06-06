@@ -1,0 +1,131 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://v3.bootcss.com/examples/dashboard/# -->
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://v3.bootcss.com/favicon.ico">
+
+     <!-- 标题自定义 -->
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'bootstrap-3.3.7/css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+    <style type="text/css">
+        div.col-xs-6{
+            padding-left: 5px;
+            padding-right: 5px;
+            width: 20%;
+        }
+        h4 {
+            text-align: center;
+            color: black;
+        }
+
+        h1.page-header{
+            margin-top: 60px;
+        }
+    </style>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">KA商机管理</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-left">
+            <li><a href="/">KA资源池</a></li>
+            <li><a href="/ka">KA客户</a></li>
+            <li><a href="/out">淘汰客户</a></li>
+          </ul>
+           <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">更新数据</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+{#        <div class="col-sm-3 col-md-2 sidebar" style="padding-top: 60px">#}
+{#          <ul class="nav nav-sidebar">#}
+            {# 显示公司名称 #}
+{#            {% for company in companys %}#}
+{#              <li><a href="{% url 'item_company' company.id %}">{{ company.name }}</a></li>#}
+{#            {% endfor %}#}
+{##}
+{#          </ul>#}
+{#        </div>#}
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style = "margin-left: 0%">
+          <h1 class="page-header">行业</h1>
+
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <h4>
+                  <a href="{% url 'item_type' 1 %}">文娱</a>
+              </h4>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <h4>
+                  <a href="{% url 'item_type' 4 %}">电商</a>
+              </h4>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <h4>
+                  <a href="{% url 'item_type' 12 %}">出行</a>
+              </h4>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <h4>
+                  <a href="{% url 'item_type' 5 %}">手机</a>
+              </h4>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <h4>
+                  <a href="{% url 'item_type' 3 %}">企业服务</a>
+              </h4>
+            </div>
+
+          </div>
+
+
+          {% block appData %}{% endblock %}
+
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script src="{% static 'bootstrap-3.3.7/css/bootstrap.min.css' %}"></script>
+
+
+
+</body></html>

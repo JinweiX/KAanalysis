@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{# 标题 #}
+{% block title %}
+淘汰客户
+{% endblock %}
+
+{# 数据列表内容 #}
+{% block appData %}
+  <h2 class="sub-header">淘汰客户数据</h2>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>名称</th>
+          <th>行业</th>
+          <th>细分行业</th>
+          <th>公司</th>
+          <th>月活(万人)</th>
+          <th>日活(万人)</th>
+          <th>死水原因</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.itemType }}</td>
+          <td>{{ item.itemSecType }}</td>
+          <td><a href="{% url 'item_company' item.company.id %}">{{ item.company }}</a></td>
+          <td>{{ item.MAU }}</td>
+          <td>{{ item.DAU }}</td>
+          <td>{{ item.died_cause }}</td>
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
