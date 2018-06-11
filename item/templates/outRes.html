@@ -19,6 +19,7 @@
           <th>月活(万人)</th>
           <th>日活(万人)</th>
           <th>死水原因</th>
+            <th>操作</th>
         </tr>
       </thead>
       <tbody>
@@ -31,6 +32,9 @@
           <td>{{ item.MAU }}</td>
           <td>{{ item.DAU }}</td>
           <td>{{ item.died_cause }}</td>
+            <td>
+                 <a href="{% url 'item_edit' item.id %}">操作</a>
+            </td>
         </tr>
         {% endfor %}
 

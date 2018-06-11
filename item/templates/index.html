@@ -7,37 +7,69 @@ KA资源池
 
 {# 数据列表内容 #}
 {% block appData %}
-  <h2 class="sub-header">资源池数据</h2>
+  <h2 style="display: inline-block;">资源池数据</h2>  共有{{ items|length }}条数据
   <div class="table-responsive">
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>名称</th>
-          <th>行业</th>
-          <th>细分行业</th>
-          <th>公司</th>
-          <th>月活(万人)</th>
-          <th>日活(万人)</th>
-          <th>状态</th>
-          <th>操作</th>
+            <th>名称</th>
+            <th>行业</th>
+            <th>细分行业</th>
+            <th>上云情况</th>
+            <th>上云时间</th>
+            <th>公司</th>
+            <th>公司属性</th>
+            <th>月活(万人)</th>
+            <th>日活(万人)</th>
+            <th>商机推荐</th>
+            <th>状态</th>
+            <th>操作</th>
         </tr>
       </thead>
       <tbody>
         {% for item in items %}
         <tr>
-          <td>{{ item.name }}</td>
-          <td>{{ item.itemType }}</td>
-          <td>{{ item.itemSecType }}</td>
-          <td><a href="{% url 'item_company' item.company.id %}">{{ item.company }}</a></td>
-          <td>{{ item.MAU }}</td>
-          <td>{{ item.DAU }}</td>
-          <td>
+            <td>{{ item.name|truncatechars:10 }}</td>
+            <td>{{ item.itemType }}</td>
+            <td>{{ item.itemSecType }}</td>
+            <td>{{ item.company.upCloud }}</td>
+            <td>{{ item.company.upCloud_time|date:'Y:m:d'}}</td>
+            <td><a href="{% url 'item_company' item.company.id %}">{{ item.company }}</a></td>
+            <td>
+                {% ifequal item.company.attribute 0 %}
+                    <a></a>
+                {% endifequal %}
+
+                {% ifequal item.company.attribute 1 %}
+                    <a>创业</a>
+                {% endifequal %}
+
+                {% ifequal item.company.attribute 2 %}
+                    <a>成熟</a>
+                {% endifequal %}
+            </td>
+            <td>{{ item.MAU }}</td>
+            <td>{{ item.DAU }}</td>
+            <td>
+                {% ifequal item.isCommend 1 %}
+                    <a style="color: red">推荐</a>
+                {% endifequal %}
+            </td>
+            <td>
           {% ifequal item.state 0 %}
-              <a style="color: black">未知</a>
+              <a style="color: black">未跟进</a>
           {% endifequal %}
 
           {% ifequal item.state 1 %}
-              <a style="color: green" href="/ka">KA</a>
+              {% ifequal item.conversion 0 %}
+                  <a style="color: green" href="/ka">KA未转化</a>
+              {% endifequal %}
+              {% ifequal item.conversion 1 %}
+                  <a style="color: green" href="/ka">KA转化中</a>
+              {% endifequal %}
+              {% ifequal item.conversion 2 %}
+                  <a style="color: green" href="/ka">KA已转化</a>
+              {% endifequal %}
           {% endifequal %}
 
           {% ifequal item.state 2 %}
@@ -47,21 +79,8 @@ KA资源池
           </td>
 
           <td>
-          {% ifequal item.state 0 %}
-                 <button>转KA</button>
-          {% endifequal %}
-
-          {% ifequal item.state 1 %}
-              <button>淘汰</button>
-          {% endifequal %}
-
-          {% ifequal item.state 2 %}
-              <button>转回</button>
-          {% endifequal %}
-
+                 <a href="{% url 'item_edit' item.id %}">操作</a>
           </td>
-
-
         </tr>
         {% endfor %}
 

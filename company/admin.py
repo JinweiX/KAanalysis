@@ -3,7 +3,7 @@ from .models import Company
 
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
-    list_display = ("name","upCloud","market_value","attribute","location")
+    list_display = ("id", "name","upCloud","market_value","attribute","location")
     ordering = ("-market_value",)
 
 

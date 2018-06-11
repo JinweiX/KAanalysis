@@ -1,0 +1,109 @@
+{% extends 'base_edit.html' %}
+
+{# 标题 #}
+{% block title %}
+    编辑条目
+{% endblock %}
+
+{# 数据列表内容 #}
+{% block body %}
+
+<body onload="load()">
+
+<script  type = "text/javascript" >
+function load(){
+     document.getElementById("state").options[{{ item.state }}].selected=true;
+     document.getElementById("conversion").options[{{ item.conversion }}].selected=true;
+}
+</script >
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">KA商机管理</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-left">
+            <li><a href="/">KA资源池</a></li>
+            <li><a href="/ka">KA客户</a></li>
+            <li><a href="/out">淘汰客户</a></li>
+          </ul>
+           <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'refresh_item' %}">更新数据</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+
+          <h2>资源池数据</h2>
+          <div class="table-responsive" style="width: 30%">
+            <form action="{% url 'item_update' item.id %}" method="post">
+                {% csrf_token %}
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <td>名称</td>
+                        <td>{{ item.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>行业</td>
+                        <td>{{ item.itemType }}</td>
+                    </tr>
+                    <tr>
+                        <td>细分行业</td>
+                        <td>{{ item.itemSecType }}</td>
+                    </tr>
+                    <tr>
+                        <td>公司</td>
+                        <td>{{ item.company.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>合作状态</td>
+                        <td>
+                            <select name="state" id="state">
+                              <option value ="0">未跟进</option>
+                              <option value ="1">KA客户</option>
+                              <option value="2">已淘汰</option>
+                            </select>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>转化进度</td>
+                        <td>
+                            <select name="conversion" id="conversion">
+                              <option value ="0">未转化</option>
+                              <option value ="1">转化中</option>
+                              <option value="2">已转化</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" value="返回" /></td>
+                        <td><input type="submit" value="提交" /></td>
+                    </tr>
+
+                  </tbody>
+                </table>
+            </form>
+          </div>
+
+      </div>
+    </div>
+
+</body>
+
+
+{% endblock %}

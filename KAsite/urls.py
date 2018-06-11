@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from item.views import item_ka,item_out,index,item_company,item_type
+from item.views import item_ka,item_out,index,item_company,item_type,refresh_item,item_edit,item_update
 
 urlpatterns = [
     path('', index, name = "index"),
@@ -24,4 +24,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('company_item/<int:company_id>',item_company,name = "item_company"),
     path('type_item/<int:itemType_id>',item_type,name = "item_type"),
+    path('refresh_item/',refresh_item,name = "refresh_item"),
+
+    #编辑item
+    path('item_edit/<int:item_id>',item_edit,name = "item_edit"),
+
+    #更改item数据
+    path('item_update/<int:item_id>',item_update,name = "item_update"),
+
+
 ]

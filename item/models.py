@@ -25,8 +25,8 @@ class Item(models.Model):
     company = models.ForeignKey(Company, on_delete = models.DO_NOTHING)
     itemType = models.ForeignKey(ItemType, on_delete = models.DO_NOTHING)
     itemSecType = models.ForeignKey(ItemSecType , on_delete=models.DO_NOTHING)
-    MAU = models.IntegerField(default=0)
-    DAU = models.IntegerField(default=0)
+    MAU = models.FloatField(default=0)
+    DAU = models.FloatField(default=0)
     industry_percent = models.IntegerField(default=0)
     #年营收
     income = models.IntegerField(default=0)

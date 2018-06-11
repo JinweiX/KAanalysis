@@ -33,6 +33,15 @@
         h1.page-header{
             margin-top: 60px;
         }
+
+        {# 表格列能够按照名称自适应宽度 #}
+        th {
+            white-space: nowrap;
+        }
+
+        td {
+            white-space: nowrap;
+        }
     </style>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -62,7 +71,7 @@
             <li><a href="/out">淘汰客户</a></li>
           </ul>
            <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">更新数据</a></li>
+            <li><a href="{% url 'refresh_item' %}">更新数据</a></li>
           </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
@@ -82,7 +91,7 @@
 {##}
 {#          </ul>#}
 {#        </div>#}
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style = "margin-left: 0%">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style = "margin-left: 0%; width: 100%;overflow-x:scroll">
           <h1 class="page-header">行业</h1>
 
           <div class="row placeholders">

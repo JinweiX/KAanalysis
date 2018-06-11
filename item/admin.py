@@ -13,7 +13,7 @@ class ItemSecTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ("name","company","itemType","itemSecType","MAU","DAU")
+    list_display = ("id","name","company","itemType","itemSecType","MAU","DAU")
     ordering = ("-MAU",)
 
 

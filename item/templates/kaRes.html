@@ -7,50 +7,61 @@ KA客户
 
 {# 数据列表内容 #}
 {% block appData %}
-  <h2 class="sub-header">
+  <h2 style="display:inline-block;">
       KA数据
-  <form class="navbar-form">
-        <input type="text" class="form-control" placeholder="Search...">
-    </form>
   </h2>
+  <form class="navbar-form">
+        <input type="text" placeholder="搜索">
+  </form>
+
 
   <div class="table-responsive">
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>名称</th>
-          <th>行业</th>
-          <th>细分行业</th>
-          <th>公司</th>
-          <th>月活(万人)</th>
-          <th>日活(万人)</th>
-          <th>转化进度</th>
+            <th>名称</th>
+            <th>行业</th>
+            <th>细分行业</th>
+            <th>公司</th>
+            <th>年营收</th>
+            <th>年营收增长率</th>
+            <th>月活(万人)</th>
+            <th>转化进度</th>
+            <th>商务负责人</th>
+            <th>架构师</th>
+            <th>操作</th>
         </tr>
       </thead>
       <tbody>
         {% for item in items %}
         <tr>
-          <td>{{ item.name }}</td>
-          <td>{{ item.itemType }}</td>
-          <td>{{ item.itemSecType }}</td>
-          <td><a href="{% url 'item_company' item.company.id %}">{{ item.company }}</a></td>
-          <td>{{ item.MAU }}</td>
-          <td>{{ item.DAU }}</td>
-          <td>
-          {# 转化进度（0-未转化、1-转化中、2-已转化） #}
-          {% ifequal item.conversion 0 %}
-              <a style="color: red">未转化</a>
-          {% endifequal %}
+            <td>{{ item.name }}</td>
+            <td>{{ item.itemType }}</td>
+            <td>{{ item.itemSecType }}</td>
+            <td><a href="{% url 'item_company' item.company.id %}">{{ item.company }}</a></td>
+            <td>{{ item.income }}</td>
+            <td>{{ item.income_rate }}</td>
+            <td>{{ item.MAU }}</td>
+            <td>
+                {# 转化进度（0-未转化、1-转化中、2-已转化） #}
+                {% ifequal item.conversion 0 %}
+                  <a style="color: red">未转化</a>
+                {% endifequal %}
 
-          {% ifequal item.conversion 1 %}
-             <a style="color: orange">转化中</a>
-          {% endifequal %}
+                {% ifequal item.conversion 1 %}
+                 <a style="color: orange">转化中</a>
+                {% endifequal %}
 
-          {% ifequal item.conversion 2 %}
-             <a style="color: green">已转化</a>
-          {% endifequal %}
+                {% ifequal item.conversion 2 %}
+                 <a style="color: green">已转化</a>
+                {% endifequal %}
+            </td>
+            <td>{{ item.business }}</td>
+            <td>{{ item.architect }}</td>
 
-          </td>
+            <td>
+                 <a href="{% url 'item_edit' item.id %}">操作</a>
+            </td>
         </tr>
         {% endfor %}
 
